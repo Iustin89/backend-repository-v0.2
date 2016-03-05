@@ -2,7 +2,7 @@
   "name": "backend-project",
   "version": "1.0.0",
   "private": true,
-  "repository": {"type": "git","url": ""},
+  "repository": {"type": "git","url": "https://github.com/Iustin89/backend-repository-v0.2.git"},
   "description": "my first backend project - internship",
   "main": "app.js",
   "dependencies": {},
