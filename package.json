@@ -1,0 +1,15 @@
+﻿{
+  "name": "backend-project",
+  "version": "1.0.0",
+  "private": true,
+  "repository": {"type": "git","url": ""},
+  "description": "my first backend project - internship",
+  "main": "app.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "justin",
+  "license": "ISC"
+}
