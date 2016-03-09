@@ -12,7 +12,7 @@ var Product = require('./models/product');
 
 // our array
 app.use(bodyParser());
-mongoose.connect('mongodb://localhost/productBD');
+mongoose.connect('mongodb://localhost:27017/productBD'); // nu reusesc sa ma conectez la baza de date!!!!
 
 
 
