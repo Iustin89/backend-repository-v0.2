@@ -1,11 +1,18 @@
-﻿{
+{
   "name": "backend-project",
   "version": "1.0.0",
   "private": true,
-  "repository": {"type": "git","url": "https://github.com/Iustin89/backend-repository-v0.2.git"},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Iustin89/backend-repository-v0.2.git"
+  },
   "description": "my first backend project - internship",
-  "main": "app.js",
-  "dependencies": {},
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "4.13.4",
+    "mongoose": "^4.4.6"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
