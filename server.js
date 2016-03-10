@@ -71,8 +71,37 @@ productRouteID.get(function (req, res) {
     Product.findById(req.params.product_id, function (err, product) {
         if (err)
             res.send(err);
-        res.json(product);
+
+        res.json({ message: 'Product gasit!', product });
     })
+});
+
+// model de update pentru produse folosind id-ul unic (accessed at PUT http://localhost:3030/api/products/:product_id)
+productRouteID.put(function (req, res) {
+    // primul pas selectam/gasim produsul dorit dupa id-ul sau unic
+    Product.findById(req.params.product_id, function (err, product) {
+        if (err)
+            res.send(err);
+        // al-2-lea pas e sa introducem noul nume
+        product.name = req.body.name;
+        // al-3-lea pas e sa salvam noua informatie
+        product.save(function (err) {
+            if (err)
+                res.send(err);
+            res.json({message: 'Product updated!'});
+        });
+    });
+});
+
+// model de stergere/delete pentru produse folosind id-ul unic (accessed at DELETE http://localhost:3030/api/products/:product_id)
+productRouteID.delete(function (req, res) {
+    Product.remove({
+        _id: req.params.product_id
+    }, function (err, product) {
+        if (err)
+            res.send(err);
+        res.json({message: 'Stergere cu succes!'});
+    });
 });
 
 // Cream/inregistram routerele(routes) 
