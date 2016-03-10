@@ -5,22 +5,19 @@
 
 // cream variabilele si apelam pachetele necesare aplicatiei
 var express = require('express');                           // apelam pachetele definite in express
-var mongoose = require('mongoose');                         // necesar pt lucrul cu mongoDB
-//var MongoClient = require('mongodb').MongoClient;
-//var assert = require('assert');
 var app = express();                                        // definim explicit utilizarea functiilor express de care aplicatie
 var bodyParser = require('body-parser');                    
 var Product = require('./models/product');                  // explicit spunem ca vom folosi modelul creat 'product'
+var mongoose = require('mongoose');                         // variabila necesara pt lucrul cu mongoDB  
 
 // CONFIGURARI NECESARE LUCRULUI CU bodyParser() - ne va permite sa returnam data dintr-un POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.set('port', process.env.PORT || 3030);                  // setam un port definit de noi local 
 
-var port = process.env.Port || 3030;                         // setam un port definit de noi local 
-
-
-
-mongoose.connect('mongodb://localhost:27017/productDB');    // realizam conexiunea explicita la baza de date creata local 
+// realizam conexiunea explicita la baza de date creata local                        
+var url = 'mongodb://localhost:27017/productDB';
+mongoose.connect(url);     
 
 // DECLARARE DE RUTE/ROUTES PENTRU API
 // ========================================================================================================================================
@@ -53,7 +50,7 @@ productRoute.post(function (req, res) {
 
             res.json({ message: 'Product creat!', data:product });
         });
-    });
+});
 
 // model de returnare a produselor create (accessed at GET http://localhost:3030/api/products)
 productRoute.get(function (req, res) {
@@ -63,7 +60,20 @@ productRoute.get(function (req, res) {
 
             res.json(product);
         });
-    });
+});
+
+// declararea de rute care au ca terminatie '/:product_id'
+// ----------------------------------------------------------------------------------------------------------------------------------------
+var productRouteID = router.route('/products/:product_id')
+
+// model de returnare a unui produs cu id-ul propriu (accessed at GET http://localhost:3030/api/products/:product_id)
+productRouteID.get(function (req, res) {
+    Product.findById(req.params.product_id, function (err, product) {
+        if (err)
+            res.send(err);
+        res.json(product);
+    })
+});
 
 // Cream/inregistram routerele(routes) 
 // ==========================================================================================================================================
@@ -71,5 +81,5 @@ app.use('/api', router);                                            // rutele cr
 
 // START THE SERVER
 // ==========================================================================================================================================
-app.listen(port);                                                   // 'ascultam' la portul predefinit de noi anterior
-console.log('Comunicarea se realizeaza la portul ', port);
+app.listen(app.get('port'));                                                   // 'ascultam' la portul predefinit de noi anterior
+console.log('Comunicarea se realizeaza la portul ', app.get('port'));
