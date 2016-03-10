@@ -106,7 +106,7 @@ productRouteID.delete(function (req, res) {
 
 // Cream/inregistram routerele(routes) 
 // ==========================================================================================================================================
-app.use('/api', router);                                            // rutele create vor fi prefixate cu '/api'
+app.use('/api', router);                                                        // rutele create vor fi prefixate cu '/api'
 
 // START THE SERVER
 // ==========================================================================================================================================
